@@ -28,8 +28,31 @@ def register(request):
         request.session['userid'] = newuser[1].id
         return redirect('/success')
 
+def login(request):
+    if request.method == 'GET':
+        return redirect('/')
+    user = User.objects.login(request.POST['email'], request.POST['password'])
+    print user
+    if user[0] == False:
+        for each in user[1]:
+            messages.errors1(request, each)
+        return redirect('/')
+    if user[0] == True:
+        messages.success(request, 'Welcome, You are logged in!')
+        request.session['userid'] = user[1].id
+        return redirect('/success')
+
+
 def logout(request):
     if 'userid' not in request.session:
         return redirect('/')
+    # if not request.user.is_authenticated:
+    #     return redirect('/')
     del request.session['userid']
     return redirect('/')
+
+def delete(request, id):
+    if 'userid' not in request.session:
+        return redirect('/')
+    User.objects.filter().delete()
+    return('/logout')

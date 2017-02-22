@@ -34,6 +34,21 @@ class userManager(models.Manager):
         else:
             return (False, errors)
 
+
+    def login(self, postEmail, postPassword):
+        errors1 = []
+        user = User.objects.filter(email = postEmail)
+
+        if not Email_Regex.match(postEmail):
+            errors1.append("Invalid email")
+        elif len(postPassword) < 8:
+            errors1.append("Password too short")
+            return (False, errors1)
+
+        if len(errors1) == 0: #if we have no errors..
+            if bcrypt.hashpw(postPassword.encode(), user[0].password.encode()) == user[0].password:
+                return (True, user )
+
 class User(models.Model):
     first_name = models.CharField(max_length=45)
     last_name = models.CharField(max_length=45)

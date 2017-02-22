@@ -8,7 +8,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
     </head>
     <body>
-        <div class="row">
+        <div class="container">
             <h2>Registration</h2>
             {% if messages %}
                 <ul class="messages">
@@ -21,7 +21,7 @@
                 {% csrf_token %}
               <div class="row">
                 <div class="input-field col s6">
-                  <input placeholder="Placeholder" id="first_name" type="text" class="validate" name="first_name">
+                  <input id="first_name" type="text" class="validate" name="first_name">
                   <label for="first_name">First Name</label>
                 </div>
                 <div class="input-field col s6">
@@ -50,7 +50,7 @@
               <input type="submit" value="Register" class="waves-effect waves-light btn">
             </form>
           </div>
-          <form class="" action="/" method="POST">
+          <form class="container" action="/login" method="POST">
              {% csrf_token %}
               <h2>Login</h2>
               <div class="row">
@@ -65,7 +65,7 @@
                   <label for="password">Password</label>
                 </div>
               </div>
-              <a class="waves-effect waves-light btn">Login</a>
+              <input type="submit" value="Login" class="waves-effect waves-light btn">
           </form>
     </body>
 </html>

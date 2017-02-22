@@ -10,7 +10,14 @@
     <body>
         <div class="row">
             <h2>Registration</h2>
-            <form action="/" class="col s12">
+            {% if messages %}
+                <ul class="messages">
+                {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+                </ul>
+              {% endif %}
+            <form action="/register" class="col s12" method="POST">
                 {% csrf_token %}
               <div class="row">
                 <div class="input-field col s6">
@@ -40,7 +47,7 @@
                   <label for="confirm_password">Confirm Password</label>
                 </div>
               </div>
-              <a class="waves-effect waves-light btn">Register</a>
+              <input type="submit" value="Register" class="waves-effect waves-light btn">
             </form>
           </div>
           <form class="" action="/" method="POST">
